@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Format currency</title>
+  </head>
+  <body>
+    <script>
+      function formatCurrency(amount, str){
+        let formattedAmt= Number(amount).toFixed(2);
+        formattedAmt=formattedAmt.replace(/\B(?=(\d{3})+(?!\d))/g,",");    // add commas for thousands
+
+        switch(str){
+          case 'USD':
+              return '$'+ formattedAmt;
+          case 'INR': /* ₹10,00,000.00 */
+            let part=amount.toFixed(2).split('.');
+            let intPart=part[0];
+            let last3=intPart.slice(-3);
+            let other=intPart.slice(0,-3).replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+            let indianformat = other? other + "," + last3 : last3;
+            return '₹'+ indianformat + '.' + part[1];
+          case 'EURO': /* 1.000.000,00 €*/
+            let europarts= amount.toFixed(2).split('.');
+            let euroformatted= europarts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return euroformatted + ',' + europarts[1] + '€';
+          default:
+            return formattedAmt;
+              
+        }
+      }
+      console.log(formatCurrency(1000000,'INR'));
+      console.log(formatCurrency(1000000,'USD'));
+      console.log(formatCurrency(1000000,'EURO'));
+    </script>
+  </body>
+</html>
