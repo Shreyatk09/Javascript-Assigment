@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Unordered list</title>
+</head>
+<body>
+  <div id="container">
+    <h1>My List</h1>
+    <ul id="myList">
+      <li class="item">Item 1</li>
+      <li class="item">Item 2</li>
+      <li class="item">Item 3</li>
+    </ul>
+    <button class="addButton" onclick="addItem()">Add Item</button>
+  </div>
+
+  <script>
+    const ListItems = [];
+
+    function addItem() {
+      const items = document.querySelectorAll('#myList li');
+      const lastText = items[items.length - 1].textContent;
+      const lastNum = Number(lastText.split(' ')[1]);
+      const newEle = 'Item ' + (lastNum + 1);
+
+      document.getElementById("myList").innerHTML += `<li class="item">${newEle}</li>`;
+      
+      // Update array
+      ListItems.push(newEle);
+      console.log(ListItems);
+    }
+
+    // Load initial list items
+    window.onload = () => {
+      const initialItems = document.querySelectorAll('#myList li');
+      initialItems.forEach(item => ListItems.push(item.textContent));
+    };
+  </script>
+</body>
+</html>
