@@ -5,34 +5,69 @@
 </head>
 <body>
   <script>
-    const Book = {
-      title: 'The Secret',
-      author:'Rhonda Byrne',
-      ISBN:'978-1-940313-09-2',
-      isBorrowed,
-      borrow(){
-        isBorrowed=true;
-      },
-      returnBook(){
-        isBorrowed=false;
+    // ✅ Book factory function
+function createBook(title, author, ISBN) {
+  return {
+    title: title,
+    author: author,
+    ISBN: ISBN,
+    isBorrowed: false,
+
+    borrow() {
+      if (!this.isBorrowed) {
+        this.isBorrowed = true;
+        console.log(`You borrowed "${this.title}"`);
+      } else {
+        console.log(`"${this.title}" is already borrowed.`);
       }
-    };
+    },
 
-    const Library={
-      
-      addBook(book){
-
-      },
-      findBookByISBN(isbn){
-
-      },
-      listAvailableBooks(){
-
-      },
-      listBorrowedBooks(){
-
+    returnBook() {
+      if (this.isBorrowed) {
+        this.isBorrowed = false;
+        console.log(`You returned "${this.title}"`);
+      } else {
+        console.log(`"${this.title}" was not borrowed.`);
       }
     }
+  };
+}
+
+const Library = {
+  books: [],
+
+  addBook(book) {
+    this.books.push(book);
+    console.log(`Added: "${book.title}"`);
+  },
+
+  findBookByISBN(isbn) {
+    return this.books.find(book => book.ISBN === isbn);
+  },
+
+  listAvailableBooks() {
+    return this.books.filter(book => !book.isBorrowed);
+  },
+
+  listBorrowedBooks() {
+    return this.books.filter(book => book.isBorrowed);
+  }
+};
+
+const book1 = createBook("The Secret", "Rhonda Byrne", "978-1-940313-09-2");
+const book2 = createBook("Atomic Habits", "James Clear", "978-0-7352-1129-5");
+
+Library.addBook(book1);
+Library.addBook(book2);
+
+book1.borrow();
+book2.borrow();
+book2.returnBook();
+
+console.log("Available Books:", Library.listAvailableBooks());
+console.log("Borrowed Books:", Library.listBorrowedBooks());
+console.log("Find by ISBN:", Library.findBookByISBN("978-1-940313-09-2"));
+
   </script>
 </body>
 </html>
