@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Interactive Counter</title>
+</head>
+<body>
+    <span>
+      <p class="js-counter"></p>
+      <button class="js-incre" onclick="
+            increment();
+      ">Increment</button>
+      <button class="js-decre" onclick="
+            decrement();
+      ">Decrement</button>
+    </span>
+    <script>
+      let count=0; 
+      displayHTML(); 
+      function displayHTML(){
+        if(count>=0){
+        document.querySelector('.js-counter').innerHTML=`Count : ${count}`;
+        }
+        else{
+          count=0;
+          document.querySelector('.js-counter').innerHTML=`Count : ${count}`;
+        }
+      }
+
+      function increment(){
+        count+=1;
+        displayHTML();
+      }
+      function decrement(){
+        count-=1;
+        displayHTML();
+      }
+    </script>
+</body>
+</html>
