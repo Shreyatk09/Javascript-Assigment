@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Scopes</title>
+</head>
+<body>
+  <script>
+    // Global scope
+    let globalOne = 'I am a global variable';
+    function testGlobal() {
+      console.log(globalOne); 
+    }
+    testGlobal(); 
+    console.log(globalOne); 
+
+    //local
+    function testLocal() {
+    let localVar = 'I am a local variable';
+    console.log(localVar);  //cannot be accessed and it gives undefined
+    }
+    testLocal();  
+
+    //block scope
+    if (true) {
+    let blockVar = 'I am block scoped';
+    console.log(blockVar);  
+    }
+    console.log(blockVar); //cannot be accessed and it gives undefined
+
+    //variable shadowing
+    let name = 'Global Name';  // Global scope
+    function testShadowing() {
+        let name = 'Local Name';  
+        console.log(name);     
+    }
+    testShadowing();
+    console.log(name); //global
+
+
+  </script>
+</body>
+</html>

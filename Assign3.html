@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+  <title>DOM</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <ul id="myList">
+    <li>Apple</li>
+    <li>Banana</li>
+    <li>Cherry</li>
+    <li>Date</li>
+    <li>Elderberry</li>
+  </ul>
+  <script>
+    const ListItems=document.querySelectorAll('#myList li');
+    console.log('Total list Items:',ListItems.length);
+     for(let i=0;i<ListItems.length;i++){
+        console.log("Item "+(i+1)+":"+ListItems[i].textContent);
+        if((i+1)%2==0){
+          ListItems[i].classList.add("Highlight");
+        }
+     }
+  </script>
+</body>
+</html>

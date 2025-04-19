@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Conditions</title>
+</head>
+<body>
+  <script>
+    function evaluateConditions(obj) {
+    if (obj.age > 18 && obj.hasLicense === true) {
+        return "Eligible to drive";
+    }
+    if (obj.temperature > 30 || obj.humidity > 70) {
+        return "Warning: High discomfort level";
+    }
+    if ((obj.role === "admin" || obj.role === "editor") && obj.isActive === true) {
+        return "Access granted";
+    }
+    if (obj.age < 18 && obj.hasLicense === false) {
+        return "Not eligible to drive";
+    }
+    if (obj.temperature < 0 || obj.isActive === false) {
+        return "Warning: Extreme cold or inactive user";
+    }
+
+    if (obj.role === "admin" && obj.isActive === false) {
+        return "Admin is inactive";
+    }
+    if ((obj.role !== "admin" && obj.role !== "editor") && obj.temperature > 35) {
+        return "Warning: Non-admin/editor and extreme temperature";
+    }
+    return "No specific conditions met";
+}
+    const obj={
+        age : 56,
+        hasLicense : false,
+        temperature:31,
+        humidity : 75,
+        isActive : true,
+        role: 'editor'
+    }
+    console.log(evaluateConditions(obj));
+  </script>
+</body>
+</html>
